@@ -37,10 +37,10 @@ function sample_info()
   END
 }
 
-function chunk()
+function Chunk()
 {
 # batches
-  if [ -f chunk15.txt ]; then rm chunk15.txt; fi
+  if [ -f Chunks15.txt ]; then rm Chunks15.txt; fi
   for chr in {1..22}
   do
      export chr=${chr}
@@ -56,14 +56,14 @@ function chunk()
        print(GenomicRanges::width(gr))
        tiles <- GenomicRanges::tile(gr, 15)
        region_list <- with(as.data.frame(tiles),cbind(seqnames,start,end))
-       write.table(region_list,file="chunk15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
+       write.table(region_list,file="Chunks15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
      END
 done
 R --no-save -q <<END
-   chunk15 <- read.table("chunk15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
-   head(chunk15)
+   Chunk15 <- read.table("Chunks15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
+   head(Chunk15)
    library(foreign)
-   write.dta(chunk15,file="chunk15.dta")
+   write.dta(chunk15,file="Chunks15.dta")
 END
 }
 
@@ -105,7 +105,7 @@ sort -k2,2 > interval.chipsnps
 (
   join -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
   awk '{print $0, 2}'
-  join -v2 -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
+  join -v1 -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
   awk '{print $0, 0}'
 ) > SNPinfo.txt
 )
