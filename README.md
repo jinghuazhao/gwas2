@@ -1,3 +1,3 @@
 # gwas2
 
-See website for more details.
+The docs/ directory contains all the source files related to the website.
