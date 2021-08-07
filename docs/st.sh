@@ -19,3 +19,6 @@ git commit -m "gwas2 utitlities"
 git add mkdocs.yml
 git commit -m "mkdocs.yml"
 git push
+
+# iconv -c -t UTF-8 README.md > README.nonutf-8
+# diff README.md README.nonutf-8

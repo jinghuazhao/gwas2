@@ -29,7 +29,7 @@ gwas2 utitlties
        1   rs555500075   .727742      0
         ...
      ```
-   * Fenland-OMICS.sample (SNPTEST sample file, Fenland-OMICS is the studyname – change it to your own)  
+   * Fenland-OMICS.sample (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
      ```
      ID_1 ID_2 missing
      0 0 0

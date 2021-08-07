@@ -108,6 +108,10 @@ sort -k2,2 > interval.chipsnps
   join -v1 -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
   awk '{print $0, 0}'
 ) > SNPinfo.txt
-)
 
-SNPinfo
+stata <<END
+  insheet rsid chr allele1 allele2 info type using SNPinfo.txt, delim(" ")
+  drop allele1 allele2
+  gzsave SNPinfo, replace
+END
+)
