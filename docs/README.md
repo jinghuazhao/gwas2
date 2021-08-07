@@ -47,7 +47,7 @@ Data files + four essentials files as follows.
      ```
 ## Implementation
 
-The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R][bgi.R] and [bgi.py](bgi.py).
+The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
 
 ## Notes
 
