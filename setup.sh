@@ -48,7 +48,7 @@ function sample_info()
     keep identifier Affymetrix_gw~l
     rename Affymetrix_gw~l id
     merge 1:1 identifier using interval_data
-    keep if _merge==3
+    drop if _merge!=3 | id==.
     drop identifier _merge
     format id %15.0g
     save interval_data, replace
