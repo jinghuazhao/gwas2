@@ -74,11 +74,11 @@ function Chunks()
 # batches
   if [ -f Chunks_15.txt ]; then rm Chunks_15.txt; fi
   (
-  for chr in {1..22}
-  do
-  #  byregion
-     byvariants
-  done
+    for chr in {1..22}
+    do
+    #  byregion
+       byvariants
+    done
   ) > Chunks_15.txt
   R --no-save -q <<\ \ END
     vars <- c("CHR","Sub","P0","P1")
