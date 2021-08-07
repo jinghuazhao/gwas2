@@ -10,7 +10,7 @@ Chromosome files: `chr{1..23}.bgen/.bgen.bgi`, where .bgi is index file created 
 
 As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on `.bgi` file instead.
 
-###  four essentials files
+###  Four essentials files
 
    1. `sample_info.dta.gz` (idorder is the samples order in BGEN file)
 
