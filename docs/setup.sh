@@ -7,6 +7,9 @@ source ~/COVID-19/py37/bin/activate
 export interval=~/rds/post_qc_data/interval/
 export impute=${interval}/imputed/uk10k_1000g_b37
 export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_imputed/
+export X=/rds/project/jmmh2/rds-jmmh2-projects/covid/ace2/interval_genetic_data/interval_imputed_data
+export INTERVALdata=~/COVID-19/HGI/20210317/INTERVALdata_17MAR2021.csv
+export OmicsMap=~/COVID-19/HGI/20210317/INTERVAL_OmicsMap_20210317.csv
 
 function bgen_bgi()
 {
@@ -33,6 +36,21 @@ function sample_info()
     format id %15.0g
     format idorder %15.0g
     gzsave sample_info, replace
+    //
+    local d : env INTERVALdata
+    insheet using "`d'", case clear comma
+    keep identifier sexPulse
+    rename sexPulse sex
+    replace sex=sex-1
+    save interval_data, replace
+    local om : env OmicsMap
+    insheet using "`om'", case clear comma
+    keep identifier Affymetrix_gw~l
+    merge 1:1 identifier using interval_data
+    keep if _merge==3
+    drop _merge
+    format Affymetrix_gw~l %15.0g
+    save interval_data, replace
   END
 }
 
