@@ -37,7 +37,7 @@ function sample_info()
   END
 }
 
-function Chunk()
+function Chunks()
 {
 # batches
   if [ -f Chunks15.txt ]; then rm Chunks15.txt; fi
