@@ -62,7 +62,7 @@ R --no-save -q <<END
    Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
    head(Chunks_15)
    library(foreign)
-   write.dta(chunks_15,file="Chunks_15.dta")
+   write.dta(Chunks_15,file="Chunks_15.dta")
 END
 }
 
