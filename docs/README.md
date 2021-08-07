@@ -4,15 +4,17 @@ gwas2 utitlties to faciliate `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which re
 
 The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
 
-## Data and meta-data files
+## Data and meta-data
 
-### Data files
+### Data
 
 Chromosome files: `chr{1..23}.bgen/.bgen.bgi`, where .bgi is index file created using command such as `bgenix -g chr9.bgen -index`.
 
 As the genotype data requires indels recoded in I/D format to save memory use by Stata, these utilities work on `.bgi` file instead. On execution, `chr{1.23}.bgen.csv` are generated which contains the SNP information in text format. Note however, the driver program for INTERVAL study does not include chromosome X.
 
-###  Four essentials files
+###  Meta-data
+
+There are four eseential files:
 
    1. `sample_info.dta.gz` (idorder is the samples order in BGEN file)
 
