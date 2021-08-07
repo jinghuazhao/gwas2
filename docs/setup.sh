@@ -41,7 +41,7 @@ function sample_info()
 function Chunks()
 {
 # batches
-  if [ -f Chunks15.txt ]; then rm Chunks15.txt; fi
+  if [ -f Chunks_15.txt ]; then rm Chunks_15.txt; fi
   for chr in {1..22}
   do
      export chr=${chr}
@@ -57,14 +57,14 @@ function Chunks()
        print(GenomicRanges::width(gr))
        tiles <- GenomicRanges::tile(gr, 15)
        region_list <- with(as.data.frame(tiles),cbind(seqnames,start,end))
-       write.table(region_list,file="Chunks15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
+       write.table(region_list,file="Chunks_15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
      END
 done
 R --no-save -q <<END
-   Chunks15 <- read.table("Chunks15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
-   head(Chunks15)
+   Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
+   head(Chunks_15)
    library(foreign)
-   write.dta(chunks15,file="Chunks15.dta")
+   write.dta(chunks_15,file="Chunks_15.dta")
 END
 }
 
