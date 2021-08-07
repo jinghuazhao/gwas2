@@ -54,7 +54,15 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#gwas2">gwas2</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#requirement">requirement</a>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#requirement">Requirement</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#implementation">Implementation</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#notes">Notes</a>
 <ul class="nav flex-column">
 </ul>
 </li>
@@ -65,27 +73,11 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="gwas2">gwas2</h1>
-<p>gwas2 utitlties</p>
-<h2 id="requirement">requirement</h2>
-<ol>
-<li>
-<p>gwas2.ado; gwas2.batch; gwas2.hlp</p>
-</li>
-<li>
-<p>snptest_v2.5.4-beta3</p>
-</li>
-<li>
-<p>Chunks_15.dta</p>
-</li>
-<li>
-<p>Recode indels into I/D format to save memory use by Stata</p>
-</li>
-<li>
-<p>Prepare the data files + four essentials files as follows.</p>
-</li>
-<li>
-<p>Chromosome files: chr{1..23}.bgen/.bgen.bgi, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -ndex</code>.</p>
-</li>
+<p>gwas2 utitlties which faciliate gwas2.ado; gwas2.batch; gwas2.hlp -- they rely on snptest_v2.5.4-beta3.</p>
+<h2 id="requirement">Requirement</h2>
+<p>Data files + four essentials files as follows.</p>
+<ul>
+<li>Chromosome files: chr{1..23}.bgen/.bgen.bgi, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -ndex</code>.</li>
 <li>sample_info.dta.gz (idorder is the samples order in BGEN file)
      <code>id   idorder   missing
      OMICF10026         1         0
@@ -110,7 +102,7 @@
       1     1       10177    14405380
       1     2    14405461    28708996
       1     3    28709005    44198392
-      ....
+      ...
       1    15   235984335   249240543
       2     1       10180    14003357
       2     2    14003460    30090194
@@ -119,7 +111,11 @@
       2    15   229415780   243188367
       3     1       60162    10466985</code></p>
 </li>
-</ol></div>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>The driver program is <a href="setup.sh">setup.sh</a>, which calls <a href="bgi.sql">bgi.sql</a>, [bgi.R][bgi.R] and <a href="bgi.py">bgi.py</a>.</p>
+<h2 id="notes">Notes</h2>
+<p>Recode indels into I/D format to save memory use by Stata.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
@@ -202,5 +198,5 @@
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-08-07 09:20:15.057703+00:00
+Build Date UTC : 2021-08-07 09:33:36.385205+00:00
 -->
