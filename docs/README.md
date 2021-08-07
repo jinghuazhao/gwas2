@@ -15,6 +15,7 @@ Data files + four essentials files as follows.
      OMICF10064         2         0
      ...
      ```
+
    * `SNPinfo.dta.gz` (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)
 
      ```
@@ -23,6 +24,7 @@ Data files + four essentials files as follows.
        1   rs555500075   .727742      0
         ...
      ```
+
    * `Fenland-OMICS.sample` (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
 
 
@@ -50,6 +52,7 @@ Data files + four essentials files as follows.
       2    15   229415780   243188367
       3     1       60162    10466985
      ```
+
 ## Implementation
 
 The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
