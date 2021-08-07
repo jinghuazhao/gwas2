@@ -2,13 +2,17 @@
 
 gwas2 utitlties to faciliate `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which rely on `snptest_v2.5.4-beta3`.
 
-## Requirement
+## Implementation
+
+The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
+
+## Data and meta-data files
 
 ### Data files
 
 Chromosome files: `chr{1..23}.bgen/.bgen.bgi`, where .bgi is index file created using command such as `bgenix -g chr9.bgen -index`.
 
-As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on `.bgi` file instead.
+As the genotype data requires indels recoded in I/D format to save memory use by Stata, these utilities work on `.bgi` file instead.
 
 ###  Four essentials files
 
@@ -57,7 +61,3 @@ As the genotype data requires indels recoded in I/D format to save memory use by
       2    15   229415780   243188367
       3     1       60162    10466985
      ```
-
-## Implementation
-
-The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
