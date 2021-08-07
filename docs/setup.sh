@@ -6,6 +6,7 @@ source ~/COVID-19/py37/bin/activate
 
 export interval=~/rds/post_qc_data/interval/
 export impute=${interval}/imputed/uk10k_1000g_b37
+export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_imputed/
 
 function bgen_bgi()
 {
@@ -70,8 +71,6 @@ END
 function SNPinfo()
 {
 # SNPinfo.dta.gz
-export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_imputed/
-
 (
   for chr in {1..22}
   do
