@@ -46,10 +46,11 @@ function sample_info()
     local om : env OmicsMap
     insheet using "`om'", case clear comma
     keep identifier Affymetrix_gw~l
+    rename Affymetrix_gw~l id
     merge 1:1 identifier using interval_data
     keep if _merge==3
-    drop _merge
-    format Affymetrix_gw~l %15.0g
+    drop identifier _merge
+    format id %15.0g
     save interval_data, replace
   END
 }
