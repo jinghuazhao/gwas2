@@ -108,7 +108,7 @@ sort -k2,2 > interval.chipsnps
 
 stata <<END
   local hpc_work : env HPC_WORK
-  insheet rsid chr allele1 allele2 info type using `hpc_work'/data/interval/SNPinfo.txt, delim(" ")
+  insheet rsid chr allele1 allele2 info type using "`hpc_work'/data/interval/SNPinfo.txt", delim(" ")
   drop allele1 allele2
   gzsave SNPinfo, replace
 END
