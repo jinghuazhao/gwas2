@@ -74,41 +74,41 @@
 <p>Data files + four essentials files as follows.</p>
 <ul>
 <li>Chromosome files: <code>chr{1..23}.bgen/.bgen.bgi</code>, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -index</code>.</li>
-<li><code>sample_info.dta.gz</code> (idorder is the samples order in BGEN file)
-     <code>id   idorder   missing
-     OMICF10026         1         0
-     OMICF10064         2         0
-     ...</code></li>
-<li><code>SNPinfo.dta.gz</code> (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)
-     <code>chr          rsid      info   type
-       1   rs367896724   .742969      0
-       1   rs555500075   .727742      0
-        ...</code></li>
 <li>
-<p><code>Fenland-OMICS.sample</code> (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
-     <code>ID_1 ID_2 missing
-     0 0 0
-     OMICF10026 OMICF10026 0
-     OMICF10064 OMICF10064 0
-     ...</code></p>
+<p><code>sample_info.dta.gz</code> (idorder is the samples order in BGEN file)</p>
+<p><code>id   idorder   missing
+ OMICF10026         1         0
+ OMICF10064         2         0
+ ...</code>
+   * <code>SNPinfo.dta.gz</code> (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)</p>
+<p><code>chr          rsid      info   type
+   1   rs367896724   .742969      0
+   1   rs555500075   .727742      0
+    ...</code>
+   * <code>Fenland-OMICS.sample</code> (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)</p>
+<p><code>ID_1 ID_2 missing
+ 0 0 0
+ OMICF10026 OMICF10026 0
+ OMICF10064 OMICF10064 0
+ ...</code></p>
 </li>
 <li>
-<p><code>Chunks_15.dta</code> (file list the BP boundaries of chunks in each chromosome. 15 chunks per chromosome, and try to make same number of markers in each chunk in a chromosome)
-     <code>CHR   Sub         P0          P1
-      1     1       10177    14405380
-      1     2    14405461    28708996
-      1     3    28709005    44198392
-      ...
-      1    15   235984335   249240543
-      2     1       10180    14003357
-      2     2    14003460    30090194
-      2     3    30090341    43676939
-      ...
-      2    15   229415780   243188367
-      3     1       60162    10466985</code></p>
+<p><code>Chunks_15.dta</code> (file list the BP boundaries of chunks in each chromosome. 15 chunks per chromosome, and try to make same number of markers in each chunk in a chromosome)</p>
+<p><code>CHR   Sub         P0          P1
+  1     1       10177    14405380
+  1     2    14405461    28708996
+  1     3    28709005    44198392
+  ...
+  1    15   235984335   249240543
+  2     1       10180    14003357
+  2     2    14003460    30090194
+  2     3    30090341    43676939
+  ...
+  2    15   229415780   243188367
+  3     1       60162    10466985</code></p>
+<h2 id="implementation">Implementation</h2>
 </li>
 </ul>
-<h2 id="implementation">Implementation</h2>
 <p>The driver program is <a href="setup.sh">setup.sh</a>, which calls <a href="bgi.sql">bgi.sql</a>, <a href="bgi.R">bgi.R</a> and <a href="bgi.py">bgi.py</a>.</p>
 <p>As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on <code>.bgi</code> file instead.</p></div>
 </div>
@@ -193,5 +193,5 @@
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-08-07 09:40:08.253648+00:00
+Build Date UTC : 2021-08-07 09:42:00.548391+00:00
 -->
