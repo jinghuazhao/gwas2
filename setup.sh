@@ -24,8 +24,8 @@ function bgen_bgi()
 }
 
 function sample_info()
-{
 # sample_info.dta.gz
+{
   ln -sf ${impute}/interval.samples interval.sample
   sed '1,2d' interval.sample > sample_info.txt
   stata <<\ \ END
@@ -70,8 +70,8 @@ function byvariants()
 }
 
 function Chunks()
+# Chunks_15.dta
 {
-# batches
   if [ -f Chunks_15.txt ]; then rm Chunks_15.txt; fi
   (
     for chr in {1..22}
@@ -90,49 +90,46 @@ function Chunks()
 }
 
 function SNPinfo()
-{
 # SNPinfo.dta.gz
-(
-  for chr in {1..22}
-  do
-    cut -f1,3-6,19 $snpstats/impute_${chr}_interval.snpstats | \
-    awk 'NR>1{
-     chr=$2+0
-     pos=$3
-     a1=$4
-     a2=$5
+{
+  (
+    for chr in {1..22}
+    do
+      cut -f1,3-6,19 $snpstats/impute_${chr}_interval.snpstats | \
+      awk 'NR>1{
+       chr=$2+0
+       pos=$3
+       a1=$4
+       a2=$5
+       if(a1>a2) snpid="chr"chr":"pos"_"a2"_"a1;
+       else snpid="chr"chr":"pos"_"a1"_"a2
+       if($1==".") rsid=snpid; else rsid=$1
+       print chr,rsid,a1,a2,$6
+      }'
+    done
+  ) | sort -k1,1 > interval.snpstats
+  awk '
+  {
+     chr=$1
+     pos=$4
+     a1=$5
+     a2=$6
      if(a1>a2) snpid="chr"chr":"pos"_"a2"_"a1;
      else snpid="chr"chr":"pos"_"a1"_"a2
-     if($1==".") rsid=snpid; else rsid=$1
-     print chr,rsid,a1,a2,$6
-    }'
-  done
-) | sort -k1,1 > interval.snpstats
-
-awk '
-{
-   chr=$1
-   pos=$4
-   a1=$5
-   a2=$6
-   if(a1>a2) snpid="chr"chr":"pos"_"a2"_"a1;
-   else snpid="chr"chr":"pos"_"a1"_"a2
-   if(substr($2,1,4)=="Affx") rsid=snpid; else rsid=$2
-   print chr,rsid,a1,a2
-}' ${interval}/genotype/affy_ukbiobank_array/genotyped/interval_qced_24.8.18.bim | \
-sort -k2,2 > interval.chipsnps
-
-(
-  join -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
-  awk '{print $0, 2}'
-  join -v1 -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
-  awk '{print $0, 0}'
-) > SNPinfo.txt
-
-stata <<END
-  local hpc_work : env HPC_WORK
-  insheet rsid chr allele1 allele2 info type using "`hpc_work'/data/interval/SNPinfo.txt", delim(" ")
-  drop allele1 allele2
-  gzsave SNPinfo, replace
-END
+     if (substr($2,1,4)=="Affx") rsid=snpid; else rsid=$2
+     print chr,rsid,a1,a2
+  }' ${interval}/genotype/affy_ukbiobank_array/genotyped/interval_qced_24.8.18.bim | \
+  sort -k2,2 > interval.chipsnps
+  (
+    join -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
+    awk '{print $0, 2}'
+    join -v1 -12 <(sort -k2,2 interval.snpstats) <(cut -d' ' -f2 interval.chipsnps) | \
+    awk '{print $0, 0}'
+  ) > SNPinfo.txt
+  stata <<\ \ END
+    local dir : env HPC_WORK
+    insheet rsid chr allele1 allele2 info type using "`dir'/data/interval/SNPinfo.txt", delim(" ")
+    drop allele1 allele2
+    gzsave SNPinfo, replace
+  END
 )
