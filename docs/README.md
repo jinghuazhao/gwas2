@@ -1,27 +1,27 @@
 # gwas2
 
-gwas2 utitlties which faciliate gwas2.ado; gwas2.batch; gwas2.hlp -- they rely on snptest_v2.5.4-beta3.
+gwas2 utitlties to faciliate `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which rely on `snptest_v2.5.4-beta3`.
 
 ## Requirement
 
 Data files + four essentials files as follows.
 
-   * Chromosome files: chr{1..23}.bgen/.bgen.bgi, where .bgi is index file created using command such as `bgenix -g chr9.bgen -ndex`.
-   * sample_info.dta.gz (idorder is the samples order in BGEN file)
+   * Chromosome files: `chr{1..23}.bgen/.bgen.bgi`, where .bgi is index file created using command such as `bgenix -g chr9.bgen -index`.
+   * `sample_info.dta.gz` (idorder is the samples order in BGEN file)
      ```
      id   idorder   missing
      OMICF10026         1         0
      OMICF10064         2         0
      ...
      ```
-   * SNPinfo.dta.gz (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)
+   * `SNPinfo.dta.gz` (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)
      ```
      chr          rsid      info   type
        1   rs367896724   .742969      0
        1   rs555500075   .727742      0
         ...
      ```
-   * Fenland-OMICS.sample (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
+   * `Fenland-OMICS.sample` (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
      ```
      ID_1 ID_2 missing
      0 0 0
@@ -30,7 +30,7 @@ Data files + four essentials files as follows.
      ...
      ```
 
-   * Chunks_15.dta (file list the BP boundaries of chunks in each chromosome. 15 chunks per chromosome, and try to make same number of markers in each chunk in a chromosome)
+   * `Chunks_15.dta` (file list the BP boundaries of chunks in each chromosome. 15 chunks per chromosome, and try to make same number of markers in each chunk in a chromosome)
      ```
      CHR   Sub         P0          P1
       1     1       10177    14405380
@@ -49,6 +49,4 @@ Data files + four essentials files as follows.
 
 The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py).
 
-## Notes
-
-Recode indels into I/D format to save memory use by Stata.
+As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on `.bgi` file instead.
