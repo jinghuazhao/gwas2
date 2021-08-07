@@ -4,11 +4,12 @@ module load ceuadmin/stata
 module load python/3.7
 source ~/COVID-19/py37/bin/activate
 
+export interval=~/rds/post_qc_data/interval/
+export impute=${interval}/imputed/uk10k_1000g_b37
+export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_imputed/
+
 function bgen_bgi()
 {
-  export interval=~/rds/post_qc_data/interval/
-  export impute=${interval}/imputed/uk10k_1000g_b37
-
   for chr in {1..22}
   do
     echo Chromosome ${chr}
@@ -27,9 +28,7 @@ function sample_info()
 # sample_info.dta.gz
   ln -sf ${impute}/interval.samples interval.sample
   sed '1,2d' interval.sample > sample_info.txt
-
   stata <<\ \ END
-  //local dir : env impute
     insheet id idorder missing using sample_info.txt, delim(" ")
     format id %15.0g
     format idorder %15.0g
@@ -37,10 +36,10 @@ function sample_info()
   END
 }
 
-function Chunk()
+function Chunks()
 {
 # batches
-  if [ -f Chunks15.txt ]; then rm Chunks15.txt; fi
+  if [ -f Chunks_15.txt ]; then rm Chunks_15.txt; fi
   for chr in {1..22}
   do
      export chr=${chr}
@@ -56,22 +55,20 @@ function Chunk()
        print(GenomicRanges::width(gr))
        tiles <- GenomicRanges::tile(gr, 15)
        region_list <- with(as.data.frame(tiles),cbind(seqnames,start,end))
-       write.table(region_list,file="Chunks15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
+       write.table(region_list,file="Chunks_15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
      END
 done
 R --no-save -q <<END
-   Chunk15 <- read.table("Chunks15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
-   head(Chunk15)
+   Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
+   head(Chunks_15)
    library(foreign)
-   write.dta(chunk15,file="Chunks15.dta")
+   write.dta(chunks_15,file="Chunks_15.dta")
 END
 }
 
 function SNPinfo()
 {
 # SNPinfo.dta.gz
-export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_imputed/
-
 (
   for chr in {1..22}
   do
