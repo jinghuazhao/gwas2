@@ -4,11 +4,11 @@ module load ceuadmin/stata
 module load python/3.7
 source ~/COVID-19/py37/bin/activate
 
+export interval=~/rds/post_qc_data/interval/
+export impute=${interval}/imputed/uk10k_1000g_b37
+
 function bgen_bgi()
 {
-  export interval=~/rds/post_qc_data/interval/
-  export impute=${interval}/imputed/uk10k_1000g_b37
-
   for chr in {1..22}
   do
     echo Chromosome ${chr}
