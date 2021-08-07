@@ -61,10 +61,10 @@ function Chunks()
      END
 done
 R --no-save -q <<END
-   Chunk15 <- read.table("Chunks15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
-   head(Chunk15)
+   Chunks15 <- read.table("Chunks15.txt",col.names=c("Sub","CHR","P0","P1"))[c("CHR","Sub","P0","P1")]
+   head(Chunks15)
    library(foreign)
-   write.dta(chunk15,file="Chunks15.dta")
+   write.dta(chunks15,file="Chunks15.dta")
 END
 }
 
