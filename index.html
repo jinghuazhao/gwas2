@@ -79,13 +79,17 @@
 <p><code>id   idorder   missing
  OMICF10026         1         0
  OMICF10064         2         0
- ...</code>
-   * <code>SNPinfo.dta.gz</code> (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)</p>
+ ...</code></p>
+</li>
+<li>
+<p><code>SNPinfo.dta.gz</code> (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)</p>
 <p><code>chr          rsid      info   type
    1   rs367896724   .742969      0
    1   rs555500075   .727742      0
-    ...</code>
-   * <code>Fenland-OMICS.sample</code> (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)</p>
+    ...</code></p>
+</li>
+<li>
+<p><code>Fenland-OMICS.sample</code> (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)</p>
 <p><code>ID_1 ID_2 missing
  0 0 0
  OMICF10026 OMICF10026 0
@@ -106,9 +110,9 @@
   ...
   2    15   229415780   243188367
   3     1       60162    10466985</code></p>
-<h2 id="implementation">Implementation</h2>
 </li>
 </ul>
+<h2 id="implementation">Implementation</h2>
 <p>The driver program is <a href="setup.sh">setup.sh</a>, which calls <a href="bgi.sql">bgi.sql</a>, <a href="bgi.R">bgi.R</a> and <a href="bgi.py">bgi.py</a>.</p>
 <p>As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on <code>.bgi</code> file instead.</p></div>
 </div>
@@ -193,5 +197,5 @@
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-08-07 09:42:00.548391+00:00
+Build Date UTC : 2021-08-07 09:43:31.558537+00:00
 -->
