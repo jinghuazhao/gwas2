@@ -71,9 +71,11 @@
 <h1 id="gwas2">gwas2</h1>
 <p>gwas2 utitlties to faciliate <code>gwas2.ado</code>, <code>gwas2.batch</code> and <code>gwas2.hlp</code> which rely on <code>snptest_v2.5.4-beta3</code>.</p>
 <h2 id="requirement">Requirement</h2>
-<p>Data files + four essentials files as follows.</p>
-<ul>
-<li>Chromosome files: <code>chr{1..23}.bgen/.bgen.bgi</code>, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -index</code>.</li>
+<h3 id="data-files">Data files</h3>
+<p>Chromosome files: <code>chr{1..23}.bgen/.bgen.bgi</code>, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -index</code>.</p>
+<p>As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on <code>.bgi</code> file instead.</p>
+<h3 id="four-essentials-files">four essentials files</h3>
+<ol>
 <li>
 <p><code>sample_info.dta.gz</code> (idorder is the samples order in BGEN file)</p>
 <p><code>id   idorder   missing
@@ -111,10 +113,9 @@
   2    15   229415780   243188367
   3     1       60162    10466985</code></p>
 </li>
-</ul>
+</ol>
 <h2 id="implementation">Implementation</h2>
-<p>The driver program is <a href="setup.sh">setup.sh</a>, which calls <a href="bgi.sql">bgi.sql</a>, <a href="bgi.R">bgi.R</a> and <a href="bgi.py">bgi.py</a>.</p>
-<p>As the genotype data requires indels recoded in I/D format to save memory use by Stata, these work on <code>.bgi</code> file instead.</p></div>
+<p>The driver program is <a href="setup.sh">setup.sh</a>, which calls <a href="bgi.sql">bgi.sql</a>, <a href="bgi.R">bgi.R</a> and <a href="bgi.py">bgi.py</a>.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
@@ -197,5 +198,5 @@
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-08-07 09:43:31.558537+00:00
+Build Date UTC : 2021-08-07 10:07:48.083481+00:00
 -->
