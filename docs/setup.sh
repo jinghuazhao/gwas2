@@ -28,9 +28,7 @@ function sample_info()
 # sample_info.dta.gz
   ln -sf ${impute}/interval.samples interval.sample
   sed '1,2d' interval.sample > sample_info.txt
-
   stata <<\ \ END
-  //local dir : env impute
     insheet id idorder missing using sample_info.txt, delim(" ")
     format id %15.0g
     format idorder %15.0g
