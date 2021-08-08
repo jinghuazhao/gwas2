@@ -88,6 +88,28 @@ function byvariants()
   rm chr${chr}.??
 }
 
+function txt2dta_by_R()
+{
+  R --no-save -q <<\ \ END
+    vars <- c("CHR","Sub","P0","P1")
+    Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[vars]
+    head(Chunks_15)
+    library(foreign)
+    write.dta(Chunks_15,file="Chunks_15.dta")
+  END
+}
+
+functino txt2dta_by_stata()
+{
+  stata -q <<\ \ END
+    insheet CHR Sub P0 P1 using Chunks_15.txt, delim(" ") case clear
+    l in 1/10
+    format P0 %15.0g
+    format P1 %15.0g
+    save Chunks_15, replace
+  END
+}
+
 function Chunks()
 # Chunks_15.dta
 {
@@ -99,13 +121,7 @@ function Chunks()
        byvariants
     done
   ) > Chunks_15.txt
-  R --no-save -q <<\ \ END
-    vars <- c("CHR","Sub","P0","P1")
-    Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[vars]
-    head(Chunks_15)
-    library(foreign)
-    write.dta(Chunks_15,file="Chunks_15.dta")
-  END
+  txt2dta_by_stata
 }
 
 function SNPinfo()
