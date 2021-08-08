@@ -34,7 +34,7 @@ There are four eseential files:
         ...
      ```
 
-   3. `Fenland-OMICS.sample` (SNPTEST sample file, Fenland-OMICS is the studyname; change it to your own)
+   3. `studyname.sample` (SNPTEST sample file, e.g., Fenland-OMICS; change it to your own)
 
 
      ```
