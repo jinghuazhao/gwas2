@@ -10,6 +10,7 @@ export snpstats=${interval}/reference_files/genetic/reference_files_genotyped_im
 export X=/rds/project/jmmh2/rds-jmmh2-projects/covid/ace2/interval_genetic_data/interval_imputed_data
 export INTERVALdata=~/COVID-19/HGI/20210317/INTERVALdata_17MAR2021.csv
 export OmicsMap=~/COVID-19/HGI/20210317/INTERVAL_OmicsMap_20210317.csv
+export TMPDIR=${HPC_WORK}/work
 
 function bgen_bgi()
 {
