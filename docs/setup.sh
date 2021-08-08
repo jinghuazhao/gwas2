@@ -55,25 +55,6 @@ function sample_info()
   END
 }
 
-function byregion()
-{
-  export chr=${chr}
-  export start=$(awk 'NR==2 {print $2}' FS="," chr${chr}.bgen.csv)
-  export end=$(awk 'END{print $2}' FS="," chr${chr}.bgen.csv)
-  R --no-save -q <<\ \ END
-    options(echo=FALSE)
-    chr <- Sys.getenv("chr")
-    start <- as.integer(Sys.getenv("start"))
-    end <- as.integer(Sys.getenv("end"))
-    require(GenomicRanges)
-    gr <- GenomicRanges::GRanges(seqnames=chr,IRanges::IRanges(start,end))
-    print(GenomicRanges::width(gr))
-    tiles <- GenomicRanges::tile(gr, 15)
-    region_list <- with(as.data.frame(tiles),cbind(seqnames,start,end))
-    write.table(region_list,file="Chunks_15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
-  END
-}
-
 function byvariants()
 {
   export N=$(($(sed '1d' chr${chr}.bgen.csv| wc -l)/15+1))
@@ -86,17 +67,6 @@ function byvariants()
      echo ${chr} ${sub} ${start} ${end}
   done
   rm chr${chr}.??
-}
-
-function txt2dta_by_R()
-{
-  R --no-save -q <<\ \ END
-    vars <- c("CHR","Sub","P0","P1")
-    Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[vars]
-    head(Chunks_15)
-    library(foreign)
-    write.dta(Chunks_15,file="Chunks_15.dta")
-  END
 }
 
 functino txt2dta_by_stata()
@@ -168,3 +138,35 @@ function SNPinfo()
     gzsave SNPinfo, replace
   END
 )
+
+# --- legacy code --- #
+
+function byregion()
+{
+  export chr=${chr}
+  export start=$(awk 'NR==2 {print $2}' FS="," chr${chr}.bgen.csv)
+  export end=$(awk 'END{print $2}' FS="," chr${chr}.bgen.csv)
+  R --no-save -q <<\ \ END
+    options(echo=FALSE)
+    chr <- Sys.getenv("chr")
+    start <- as.integer(Sys.getenv("start"))
+    end <- as.integer(Sys.getenv("end"))
+    require(GenomicRanges)
+    gr <- GenomicRanges::GRanges(seqnames=chr,IRanges::IRanges(start,end))
+    print(GenomicRanges::width(gr))
+    tiles <- GenomicRanges::tile(gr, 15)
+    region_list <- with(as.data.frame(tiles),cbind(seqnames,start,end))
+    write.table(region_list,file="Chunks_15.txt",append=TRUE,sep="\t",col.names=FALSE,quote=FALSE)
+  END
+}
+
+function txt2dta_by_R()
+{
+  R --no-save -q <<\ \ END
+    vars <- c("CHR","Sub","P0","P1")
+    Chunks_15 <- read.table("Chunks_15.txt",col.names=c("Sub","CHR","P0","P1"))[vars]
+    head(Chunks_15)
+    library(foreign)
+    write.dta(Chunks_15,file="Chunks_15.dta")
+  END
+}
