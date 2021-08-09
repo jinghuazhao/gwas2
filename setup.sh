@@ -54,6 +54,7 @@ function sample_info()
     format id %15.0g
     save interval_data, replace
   END
+  rm sample_info.txt
 }
 
 function byvariants()
