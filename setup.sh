@@ -141,6 +141,16 @@ function SNPinfo()
   END
 )
 
+function tidy_up()
+{
+ rm SNPinfo.txt
+ rm interval.snpstats
+ rm Variant.txt metadata.txt
+ rm interval.chipsnps
+ rm chr*bgen*csv
+ rm Chunks_15.txt
+}
+
 # --- legacy code --- #
 
 function byregion()
