@@ -76,6 +76,14 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#caprion-example">Caprion example</a>
 <ul class="nav flex-column">
+<li class="nav-item" data-level="2"><a class="nav-link" href="#setup">setup</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#execution">execution</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -84,6 +92,7 @@
 <div class="col-md-9" role="main">
 <h1 id="caprion-example">Caprion example</h1>
 <p>The working directory as with variables is predefined for pilot project on Caprion platform, and we use the appropriate setup for the INTERVAL study.</p>
+<h2 id="setup">setup</h2>
 <pre><code class="language-bash">export TMPDIR=${HPC_WORK}/work
 export dir=~/rda/projects/Caprion_proteomics
 export caprion=${dir}/pilot
@@ -121,6 +130,8 @@ module load ceuadmin/stata
   done
 </code></pre>
 <p>Note that long names will be abbreviated by Stata, whose algorithm does not always produce unique names.</p>
+<h2 id="execution">execution</h2>
+<p>The call to the pipeline is made as follows,</p>
 <pre><code class="language-stata">local dir : env HPC_WORK
 local caprion : env caprion
 local y : env y
