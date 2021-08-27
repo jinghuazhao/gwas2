@@ -129,7 +129,7 @@ module load ceuadmin/stata
     stata-mp -b do ${caprion}/utils/gwas2_invn.do
   done
 </code></pre>
-<p>Note that long names will be abbreviated by Stata, whose algorithm does not always produce unique names.</p>
+<p>Note that long (<code>full</code>) names will be abbreviated (<code>abbrev</code>) by Stata, whose algorithm does not always produce unique names. We also have versions for raw data and inverse normalised (_invn) data.</p>
 <h2 id="execution">execution</h2>
 <p>The call to the pipeline is made as follows,</p>
 <pre><code class="language-stata">local dir : env HPC_WORK
@@ -149,7 +149,7 @@ gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
 */    covariates(agePulse bmi PC1 PC2 PC3 PC4 PC5 PC6 PC7 PC8 PC9 PC10 PC11 PC12 PC13 PC14 PC15 PC16 PC17 PC18 PC19 PC20) /*
 */    class(sexPulse ethnicity classification) dirwork("`caprion'/`y'") outfmt(txt)
 </code></pre>
-<p>Our model is </p>
+<p>where the <code>merge</code> command add a variable named <code>sex</code> as required by the Stata package. Our model is </p>
 <div class="arithmatex">\[y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype\]</div>
 <p>Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge.</p></div>
 </div>
