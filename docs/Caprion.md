@@ -63,6 +63,6 @@ gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
 
 Our model is 
 
-$$y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots PC20 + genotype$$
+$$y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype$$
 
 Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge.
