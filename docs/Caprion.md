@@ -2,6 +2,8 @@
 
 The working directory as with variables is predefined for pilot project on Caprion platform, and we use the appropriate setup for the INTERVAL study.
 
+## setup
+
 ```bash
 export TMPDIR=${HPC_WORK}/work
 export dir=~/rda/projects/Caprion_proteomics
@@ -41,6 +43,10 @@ module load ceuadmin/stata
 ```
 
 Note that long names will be abbreviated by Stata, whose algorithm does not always produce unique names.
+
+## execution
+
+The call to the pipeline is made as follows,
 
 ```stata
 local dir : env HPC_WORK
