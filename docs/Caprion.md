@@ -42,7 +42,7 @@ module load ceuadmin/stata
   done
 ```
 
-Note that long names will be abbreviated by Stata, whose algorithm does not always produce unique names.
+Note that long (`full`) names will be abbreviated (`abbrev`) by Stata, whose algorithm does not always produce unique names. We also have versions for raw data and inverse normalised (_invn) data.
 
 ## execution
 
@@ -67,7 +67,7 @@ gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
 */    class(sexPulse ethnicity classification) dirwork("`caprion'/`y'") outfmt(txt)
 ```
 
-Our model is 
+where the `merge` command add a variable named `sex` as required by the Stata package. Our model is 
 
 $$y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype$$
 
