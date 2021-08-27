@@ -2,7 +2,7 @@
 
 gwas2 utitlties to faciliate `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which rely on `snptest_v2.5.4-beta3`.
 
-The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py). Practically however, SNPTEST does not use information from .bgen.bgi as goog as SAIGE.
+The driver program is [setup.sh](setup.sh), which calls [bgi.sql](bgi.sql), [bgi.R](bgi.R) and [bgi.py](bgi.py). Practically however, SNPTEST does not use information from `.bgen.bgi` as goog as SAIGE.
 
 ## Data and meta-data
 
