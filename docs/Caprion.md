@@ -67,8 +67,8 @@ gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
 */    class(sexPulse ethnicity classification) dirwork("`caprion'/`y'") outfmt(txt)
 ```
 
-where the `merge` command add a variable named `sex` as required by the Stata package. Our model is 
+where the `merge` command add a variable named `sex` (0=male, 1=female) as required by the Stata package. Our association model is
 
 $$y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype$$
 
-Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge.
+Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge under SNPTEST.
