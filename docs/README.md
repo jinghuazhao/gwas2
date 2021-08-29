@@ -1,6 +1,6 @@
-# gwas2
+# Stata package
 
-gwas2 utitlties to faciliate `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which rely on `snptest_v2.5.4-beta3`.
+The Stata package includes `gwas2.ado`, `gwas2.batch` and `gwas2.hlp` which rely on `snptest_v2.5.4-beta3`.
 
 ## Data and meta-data
 
