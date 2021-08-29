@@ -1,7 +1,7 @@
 site_name: gwas2
 nav:
   - bgen.bgi: bgen.bgi.md
-  - gwas2: gwas2.md
+  - gwas2: README.md
   - Example: Caprion.md
 theme:
     name: mkdocs
