@@ -6,7 +6,7 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
-<title>Example - gwas2</title>
+<title>gwas2 - gwas2</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/font-awesome.min.css" rel="stylesheet"/>
 <link href="../css/base.css" rel="stylesheet"/>
@@ -40,11 +40,11 @@
 <li class="navitem">
 <a class="nav-link" href="../bgen.bgi/">bgen.bgi</a>
 </li>
-<li class="navitem">
-<a class="nav-link" href="../gwas2/">gwas2</a>
-</li>
 <li class="navitem active">
-<a class="nav-link" href="./">Example</a>
+<a class="nav-link" href="./">gwas2</a>
+</li>
+<li class="navitem">
+<a class="nav-link" href="../Caprion/">Example</a>
 </li>
 </ul>
 <ul class="nav navbar-nav ml-auto">
@@ -54,12 +54,12 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../gwas2/" rel="prev">
+<a class="nav-link" href="../bgen.bgi/" rel="prev">
 <i class="fa fa-arrow-left"></i> Previous
                                 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link disabled" rel="next">
+<a class="nav-link" href="../Caprion/" rel="next">
                                     Next <i class="fa fa-arrow-right"></i>
 </a>
 </li>
@@ -77,13 +77,9 @@
 </div>
 <div class="navbar-collapse collapse card bg-secondary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-level="1"><a class="nav-link" href="#caprion-example">Caprion example</a>
+<li class="nav-item" data-level="1"><a class="nav-link" href="#gwas2">gwas2</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#setup">setup</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#execution">execution</a>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#data-and-meta-data">Data and meta-data</a>
 <ul class="nav flex-column">
 </ul>
 </li>
@@ -93,68 +89,55 @@
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="caprion-example">Caprion example</h1>
-<p>The working directory as with variables is predefined for pilot project on Caprion platform, and we use the appropriate setup for the INTERVAL study.</p>
-<h2 id="setup">setup</h2>
-<pre><code class="language-bash">export TMPDIR=${HPC_WORK}/work
-export dir=~/rda/projects/Caprion_proteomics
-export caprion=${dir}/pilot
-
-. /etc/profile.d/modules.sh
-module load ceuadmin/stata
-
-  export full=(RCN3_442625488_VADQDGDSMATR RCN3_442666668_EVAKEFDQLTPEESQAR RCN3_All RCN3_DR)
-  export abbrev=(RCN3_44262548~R RCN3_44266666~R RCN3_All RCN3_DR)
-  for i in {0..3}
-  do
-    export y=${full[$i]}
-    export trait=${abbrev[$i]}
-    if [ ! -d ${caprion}/${y} ]; then mkdir ${caprion}/${y}; fi
-    echo ${y} -- ${trait}
-    stata-mp -b do ${caprion}/utils/gwas2.do
-  done
-  for i in {0..3}
-  do
-    export y=${full[$i]}
-    export trait=${abbrev[$i]}
-    echo ${y} -- ${trait}
-    head -1 ${caprion}/${y}/interval.*.All.txt
-    grep -w rs113886122 ${caprion}/${y}/interval.*.All.txt
-  done
-# _invn
-  export abbrev=(RCN3_44262548~n RCN3_44266666~R RCN3_All_invn RCN3_DR_invn)
-  for i in {0..3}
-  do
-    export y=${full[$i]}_invn
-    export trait=${abbrev[$i]}
-    if [ ! -d ${caprion}/${y} ]; then mkdir ${caprion}/${y}; fi
-    echo ${y} -- ${trait}
-    stata-mp -b do ${caprion}/utils/gwas2_invn.do
-  done
-</code></pre>
-<p>Note that long (<code>full</code>) names will be abbreviated (<code>abbrev</code>) by Stata, whose algorithm does not always produce unique names. We also have versions for raw data and inverse normalised (_invn) data.</p>
-<h2 id="execution">execution</h2>
-<p>The call to the pipeline is made as follows,</p>
-<pre><code class="language-stata">local dir : env HPC_WORK
-local caprion : env caprion
-local y : env y
-local trait : env trait
-set maxvar 21000
-insheet using "`caprion'/data2/phase2.dat", delim(" ") case clear
-// To fix the glitch of SNPTEST on covariates
-foreach x of varlist PC1-PC20 {
-   replace `x'=`x'*10000
-}
-rename ID_1 id
-format id %15.0g
-merge 1:1 id using "`dir'/data/interval/interval_data"
-gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
-*/    covariates(agePulse bmi PC1 PC2 PC3 PC4 PC5 PC6 PC7 PC8 PC9 PC10 PC11 PC12 PC13 PC14 PC15 PC16 PC17 PC18 PC19 PC20) /*
-*/    class(sexPulse ethnicity classification) dirwork("`caprion'/`y'") outfmt(txt)
-</code></pre>
-<p>where the <code>merge</code> command add a variable named <code>sex</code> (0=male, 1=female) as required by the Stata package. Our association model is</p>
-<div class="arithmatex">\[y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype\]</div>
-<p>Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge under SNPTEST.</p></div>
+<h1 id="gwas2">gwas2</h1>
+<p>gwas2 utitlties to faciliate <code>gwas2.ado</code>, <code>gwas2.batch</code> and <code>gwas2.hlp</code> which rely on <code>snptest_v2.5.4-beta3</code>.</p>
+<h2 id="data-and-meta-data">Data and meta-data</h2>
+<h3 id="data">Data</h3>
+<p>Chromosome files: <code>chr{1..23}.bgen/.bgen.bgi</code>, where .bgi is index file created using command such as <code>bgenix -g chr9.bgen -index</code>.</p>
+<p>As the genotype data requires indels recoded in I/D format to save memory use by Stata, these utilities work on <code>.bgi</code> file instead. On execution, <code>chr{1.23}.bgen.csv</code> are generated which contains the SNP information in text format. Note however, the driver program for INTERVAL study does not include chromosome X.</p>
+<h3 id="meta-data">Meta-data</h3>
+<p>There are four eseential files:</p>
+<ol>
+<li>
+<p><code>sample_info.dta.gz</code> (idorder is the samples order in BGEN file)</p>
+<p><code>id   idorder   missing
+ OMICF10026         1         0
+ OMICF10064         2         0
+ ...</code></p>
+</li>
+<li>
+<p><code>SNPinfo.dta.gz</code> (type: 0=imputed; 2=genotyped and in reference panel as well; 3=genotyped and not in ref panel)</p>
+<p><code>chr          rsid      info   type
+   1   rs367896724   .742969      0
+   1   rs555500075   .727742      0
+    ...</code></p>
+</li>
+<li>
+<p><code>studyname.sample</code> (SNPTEST sample file, e.g., Fenland-OMICS; change <code>studyname</code> to your own)</p>
+<p><code>ID_1 ID_2 missing
+ 0 0 0
+ OMICF10026 OMICF10026 0
+ OMICF10064 OMICF10064 0
+ ...</code></p>
+</li>
+<li>
+<p><code>Chunks_15.dta</code> (file list the BP boundaries of chunks in each chromosome. 15 chunks per chromosome, and try to make same number of markers in each chunk in a chromosome)</p>
+<p><code>CHR   Sub         P0          P1
+  1     1       10177    14405380
+  1     2    14405461    28708996
+  1     3    28709005    44198392
+  ...
+  1    15   235984335   249240543
+  2     1       10180    14003357
+  2     2    14003460    30090194
+  2     3    30090341    43676939
+  ...
+  2    15   229415780   243188367
+  3     1       60162    10466985</code></p>
+</li>
+</ol>
+<h3 id="drawback">Drawback</h3>
+<p>Practically however, SNPTEST does not use information from <code>.bgen.bgi</code> as good as SAIGE.</p></div>
 </div>
 </div>
 <footer class="col-md-12">
