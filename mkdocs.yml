@@ -1,7 +1,8 @@
 site_name: gwas2
 nav:
+  - Home: README.md
   - bgen.bgi: bgen.bgi.md
-  - Stata package: README.md
+  - Stata package: gwas2.md
   - Example: Caprion.md
 theme:
     name: mkdocs
