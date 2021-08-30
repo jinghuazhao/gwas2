@@ -6,7 +6,7 @@ Our association model is
 
 $$y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype$$
 
-## execution
+## Execution
 
 The call to the pipeline is made as follows,
 
@@ -33,7 +33,7 @@ where the `merge` command add a variable named `sex` (0=male, 1=female) as requi
 
 Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge under SNPTEST.
 
-## preparations
+## Preparations
 
 ```bash
 export TMPDIR=${HPC_WORK}/work
