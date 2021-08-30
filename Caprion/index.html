@@ -82,11 +82,11 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-level="1"><a class="nav-link" href="#caprion-example">Caprion example</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-level="2"><a class="nav-link" href="#execution">execution</a>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#execution">Execution</a>
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-level="2"><a class="nav-link" href="#preparations">preparations</a>
+<li class="nav-item" data-level="2"><a class="nav-link" href="#preparations">Preparations</a>
 <ul class="nav flex-column">
 </ul>
 </li>
@@ -100,7 +100,7 @@
 <p>The working directory as with variables is predefined for pilot project on Caprion platform, and we use the appropriate setup for the INTERVAL study.</p>
 <p>Our association model is</p>
 <div class="arithmatex">\[y \sim age + bmi + sex + ethnicity + classification + PC1 + \ldots + PC20 + genotype\]</div>
-<h2 id="execution">execution</h2>
+<h2 id="execution">Execution</h2>
 <p>The call to the pipeline is made as follows,</p>
 <pre><code class="language-stata">local dir : env HPC_WORK
 local caprion : env caprion
@@ -121,7 +121,7 @@ gwas2 `trait', studyname(interval) dirgenefiles("`caprion'/data2") chr(19) /*
 </code></pre>
 <p>where the <code>merge</code> command add a variable named <code>sex</code> (0=male, 1=female) as required by the Stata package.</p>
 <p>Strangely as before, we need to scale up the principal components (PCs) in order for the model to converge under SNPTEST.</p>
-<h2 id="preparations">preparations</h2>
+<h2 id="preparations">Preparations</h2>
 <pre><code class="language-bash">export TMPDIR=${HPC_WORK}/work
 export dir=~/rda/projects/Caprion_proteomics
 export caprion=${dir}/pilot
