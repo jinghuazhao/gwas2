@@ -1,4 +1,6 @@
 site_name: gwas2
+repo_url: https://github.com/jinghuazhao/gwas2
+edit_uri: ""
 nav:
   - "": README.md
   - bgen.bgi: bgen.bgi.md
